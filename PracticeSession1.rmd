@@ -1,0 +1,72 @@
+```{r}
+library(MASS)
+painters
+```
+# this code will open an file name painters
+
+```{r}
+splitted <- split(painters,painters$School)
+splitted
+```
+# this will split the data based on value of the School column in the painters table for eg School name of A are sorted together B are Sorted together and so on
+
+```{r}
+tapply(painters$Composition, painters$Expression, mean)
+```
+# this code is used to find the mean of each column in the painter table which we are using
+
+```{r}
+x <- c(1.3, 1.5, 2.5, 3.8, 4.1, 5.9, 7.1, 8.4, 9.0)
+xdescrete <- cut(x,breaks = c(-Inf,2,5,8,Inf))  # xdescrete will first create ranges
+is.factor(xdescrete)  # display the range in which the given value exist for example 1.3 exit in the range (-Inf,2]
+xdescrete
+table(xdescrete)   #this will display how many values fall in that interval
+```
+
+```{r}
+library(readr)
+pizza_delivery <- read_csv("~/Documents/Codes/SDA/pizza_delivery.csv")
+nrow(na.omit(pizza_delivery))  #this will omit all the values that contains the value na
+ecdf_branch <- ecdf(table(pizza_delivery$branch))  # ecdf: Creates the empirical cumulative distribution function (ECDF) for the frequency distribution of the branch column and stores it in the variable ecdf_branch
+
+#Step graph
+plot(ecdf_branch,   #plots the values in ecdf_branch
+     main = "ECDF of Branches",   #title of the graph
+     xlab = "Branch",   #x-axis name
+     ylab = "ECDF",   #y-axis name
+     col = c('blue', 'green','red'),  #color of the plots
+     # if there are less no of colors than points so it rotates and uses these same colors again
+     lwd = 2)  #set the line width 2
+```
+# this code will read the data file and drawing the graph with respect to the points in the table
+
+```{r}
+#Step graph for temperature
+# You will notice its a line graph but once you zoom in you will see many step graphs
+ecdf_temperature <- ecdf((pizza_delivery$temperature)) 
+plot(ecdf_temperature,
+     main="ECDF of Temperature",
+     xlab="temperature",
+     ylab="ECDF",
+     col = 'blue',
+     lwd = 2)
+```
+
+```{r}
+#bar chart
+branchNo = table(pizza_delivery$branch)
+barplot(branchNo,
+        main="Bar plot for ECDF of Branch",
+        xlab="Branch",
+        ylab="count",
+        col = c('blue','green','red','purple')
+       )
+```
+
+```{r}
+#Pie chart
+pie(branchNo,
+    main = "Piechart",
+    labels = names(table(pizza_delivery$branch)),
+    col = c('blue','green','red','purple'))
+```
