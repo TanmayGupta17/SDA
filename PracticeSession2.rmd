@@ -1,0 +1,15 @@
+```{r}
+result2014 <- c(0.6215,0.2223,0.063,0.024,0.0067,0.067)
+results2009 <- c(0.6590,0.1666,0,0.0455,0.0742,0.0547)
+difference <- result2014-results2009
+barplot(
+  difference,
+  main="Barplot for result calculated",
+  xlab="Party",
+  ylab="Result",
+  col=c('blue','red','green'),
+  names.arg = c('a','b','c','d','e','f')
+)
+```
+# this code will display the difference between results of 2014 and 2009
+
