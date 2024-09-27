@@ -13,3 +13,91 @@ barplot(
 ```
 # this code will display the difference between results of 2014 and 2009
 
+```{r}
+goals <- c(
+  6, 24, 90+1, 8, 4, 25, 3, 83, 89, 34, 25, 24, 18, 6,
+  23, 10, 28, 4, 63, 6, 60, 5, 40, 2, 22, 26, 23, 26,
+  44, 49, 34, 2, 33, 9, 16, 55, 23, 13, 23, 4, 8, 26,
+  70, 4, 6, 60, 23, 90+5, 28, 49, 6, 57, 33, 56, 7
+)
+min <- min(goals)
+max <- max(goals)
+
+min
+max
+```
+# this will display the scale of the array goals
+
+```{r}
+goals <- c(
+  6, 24, 90+1, 8, 4, 25, 3, 83, 89, 34, 25, 24, 18, 6,
+  23, 10, 28, 4, 63, 6, 60, 5, 40, 2, 22, 26, 23, 26,
+  44, 49, 34, 2, 33, 9, 16, 55, 23, 13, 23, 4, 8, 26,
+  70, 4, 6, 60, 23, 90+5, 28, 49, 6, 57, 33, 56, 7
+)
+xdescrete <- cut(goals,breaks = c(0,15,30,45,60,75,90,96))
+table(xdescret
+```
+# this will display the frequency of each range
+
+```{r}
+goals <- c(
+  6, 24, 90+1, 8, 4, 25, 3, 83, 89, 34, 25, 24, 18, 6,
+  23, 10, 28, 4, 63, 6, 60, 5, 40, 2, 22, 26, 23, 26,
+  44, 49, 34, 2, 33, 9, 16, 55, 23, 13, 23, 4, 8, 26,
+  70, 4, 6, 60, 23, 90+5, 28, 49, 6, 57, 33, 56, 7
+)
+xdescrete <- cut(goals,breaks = c(0,15,30,45,60,75,90,96))
+table(xdescrete)
+hist(goals, breaks = c(0, 15, 30, 45, 60, 75, 90, 96), 
+     xlim = c(0, 100),  # Adjusting the x-axis limits
+     main = "Histogram of Goals",
+     xlab = "Goals")
+lines(density(goals),col='red',lwd=2)
+```
+# this will compare histogram with kernel density plot
+
+```{r}
+xdescrete_table <- table(xdescrete)
+ecdf_goals <- ecdf((xdescrete_table))
+ecdf_goals
+```
+#this will print ecdf of the grouped data
+
+```{r}
+ecdf_goals <- ecdf((goals))
+plot(ecdf_goals,
+     main="ECDF GOALS",
+     xlab = "goals",
+     ylab = "ecdf",
+     col = c('red','green','blue'),
+     lwd = 2
+     )
+xdescrete_table <- table(xdescrete)
+plot(xdescrete_table,
+     main = "Grouped Data ECDF",
+     xlab = "Goals",
+     ylab = "Frequency",
+     col = c('red', 'green', 'blue', 'purple', 'orange', 'cyan', 'yellow'),
+     lwd = 2,
+     type = "s"
+     )
+```
+# this will display the graphs of ecdf of original data and grouped data using step function
+
+```{r}
+first_half_goals <- sum(goals <= 45)
+total <- length(goals)
+a <- first_half_goals/total
+print(paste("First half goals:", a*100))
+
+# (ii) Last 10 minutes or extra time (80+ minutes)
+last_ten_or_extra_time_goals <- sum(goals >= 80)
+b<-last_ten_or_extra_time_goals/total
+print(paste("Last 10 minutes or extra time goals:", b*100))
+
+# (iii) Between the 20th and 65th minute
+between_20_and_65_goals <- sum(goals >= 20 & goals <= 65)
+c <- between_20_and_65_goals/total
+print(paste("Goals between 20th and 65th minute:", c))
+```
